@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -14,9 +12,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 //Redux
+import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
+import redirect from '../../utils/redirect';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -84,14 +84,7 @@ const SignUp = ({ setAlert, isAuthenticated, register, role }) => {
   };
 
   //redirect
-  if (isAuthenticated) {
-    console.log(role);
-    if (role === 'admin') {
-      return <Redirect to='/BankHome' />;
-    } else if (role === 'user') {
-      return <Redirect to='/AccountHome' />;
-    }
-  }
+  if (isAuthenticated) return redirect(role);
 
   return (
     <Container component='main' maxWidth='xs'>

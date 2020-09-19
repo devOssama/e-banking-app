@@ -6,9 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 //Redux
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import redirect from '../../utils/redirect';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -27,11 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Landing = ({ isAuthenticated }) => {
+const Landing = ({ isAuthenticated, role }) => {
   const classes = useStyles();
-  if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
-  }
+  //redirect
+  if (isAuthenticated) return redirect(role);
 
   return (
     <React.Fragment>
@@ -96,6 +96,7 @@ Landing.propTypes = {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  role: state.auth.user ? state.auth.user.role : null,
 });
 
 export default connect(mapStateToProps)(Landing);

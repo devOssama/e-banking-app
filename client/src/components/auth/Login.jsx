@@ -10,10 +10,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 //Redux
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import redirect from '../../utils/redirect';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,14 +54,7 @@ const SignIn = ({ login, isAuthenticated, role }) => {
   };
 
   //redirect
-  if (isAuthenticated) {
-    console.log(role);
-    if (role === 'admin') {
-      return <Redirect to='/BankHome' />;
-    } else if (role === 'user') {
-      return <Redirect to='/AccountHome' />;
-    }
-  }
+  if (isAuthenticated) return redirect(role);
 
   return (
     <Container component='main' maxWidth='xs'>
