@@ -9,6 +9,9 @@ const checkObjectId = require('../../middleware/checkObjectId');
 //@access Private
 router.get('/me', auth, async (req, res) => {
   try {
+    if (req.user.role !== 'user') {
+      return res.status(500).send('Unauthorized');
+    }
     const profile = await Profile.findOne({
       user: req.user.id,
     }).populate('user', ['firstName', 'lastName']);
@@ -42,6 +45,9 @@ router.post(
     ],
   ],
   async (req, res) => {
+    if (req.user.role !== 'user') {
+      return res.status(500).send('Unauthorized');
+    }
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -104,6 +110,9 @@ router.get('/', async (req, res) => {
 //@access Public
 router.get('/user/:user_id', checkObjectId('user_id'), async (req, res) => {
   try {
+    if (req.user.role !== 'user') {
+      return res.status(500).send('Unauthorized');
+    }
     const profile = await Profile.findOne({
       user: req.params.user_id,
     }).populate('user', ['firstName', 'lastName']);
@@ -137,6 +146,9 @@ router.put(
     ],
   ],
   async (req, res) => {
+    if (req.user.role !== 'admin') {
+      return res.status(500).send('Unauthorized');
+    }
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -147,7 +159,7 @@ router.put(
 
     let profile = await Profile.findOne({ accountNumber: accountNumber });
     if (!profile) {
-      return res.status(400).json({ msg: 'Profile not found.' });
+      return res.status(400).json({ errors: [{ msg: 'Profile not found.' }] });
     }
     let bank = await Bank.findOne({ bankName: 'banque populaire' });
 
@@ -155,7 +167,9 @@ router.put(
     const totalBankBalance = parseInt(bank.totalDeposit);
 
     if (totalBankBalance < amount) {
-      return res.status(500).json({ msg: 'Not enought balance !' });
+      return res
+        .status(500)
+        .json({ errors: [{ msg: 'Not enought balance !' }] });
     }
 
     try {
@@ -200,6 +214,9 @@ router.put(
     ],
   ],
   async (req, res) => {
+    if (req.user.role !== 'admin') {
+      return res.status(500).send('Unauthorized');
+    }
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -210,7 +227,7 @@ router.put(
 
     let profile = await Profile.findOne({ accountNumber: accountNumber });
     if (!profile) {
-      return res.status(400).json({ msg: 'Profile not found.' });
+      return res.status(400).json({ errors: [{ msg: 'Profile not found.' }] });
     }
     let bank = await Bank.findOne({ bankName: 'banque populaire' });
 
@@ -218,7 +235,9 @@ router.put(
     const totalBankBalance = parseInt(bank.totalDeposit);
 
     if (userBalance < amount) {
-      return res.status(500).json({ msg: 'Not enought balance !' });
+      return res
+        .status(500)
+        .json({ errors: [{ msg: 'Not enought balance !' }] });
     }
 
     try {

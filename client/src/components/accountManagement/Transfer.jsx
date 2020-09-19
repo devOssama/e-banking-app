@@ -8,9 +8,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 //Redux
-import { credit, debit } from '../../actions/profile';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { makeTransaction } from '../../actions/transaction';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,26 +32,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreditDebit = ({ credit, debit }) => {
+const Transfer = ({ makeTransaction }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
-    accountNumber: '',
+    targetAccountNumber: '',
     amount: '',
   });
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const { accountNumber, amount } = formData;
+  const { targetAccountNumber, amount } = formData;
 
-  const onSubmitCredit = async (e) => {
+  const onSubmitTransaction = async (e) => {
     e.preventDefault();
-    credit(formData);
-  };
-  const onSubmitDebit = async (e) => {
-    e.preventDefault();
-    debit({ accountNumber, amount });
+    makeTransaction(formData);
   };
 
   return (
@@ -66,8 +62,8 @@ const CreditDebit = ({ credit, debit }) => {
             fullWidth
             id='target'
             label='Target account'
-            name='accountNumber'
-            value={accountNumber}
+            name='targetAccountNumber'
+            value={targetAccountNumber}
             autoComplete='target'
             autoFocus
             onChange={onChange}
@@ -84,32 +80,17 @@ const CreditDebit = ({ credit, debit }) => {
             autoComplete='amount'
             onChange={onChange}
           />
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <Button
-                type='submit'
-                fullWidth
-                variant='contained'
-                color='primary'
-                className={classes.submit}
-                onClick={onSubmitCredit}
-              >
-                Credit
-              </Button>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Button
-                type='submit'
-                fullWidth
-                variant='contained'
-                color='primary'
-                className={classes.submit}
-                onClick={onSubmitDebit}
-              >
-                Debit
-              </Button>
-            </Grid>
+          <Grid item xs={12} sm={12}>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+              onClick={onSubmitTransaction}
+            >
+              Transfer
+            </Button>
           </Grid>
         </form>
       </div>
@@ -118,9 +99,8 @@ const CreditDebit = ({ credit, debit }) => {
   );
 };
 
-CreditDebit.propTypes = {
-  credit: PropTypes.func.isRequired,
-  debit: PropTypes.func.isRequired,
+Transfer.propTypes = {
+  makeTransaction: PropTypes.func.isRequired,
 };
 
-export default connect(null, { credit, debit })(CreditDebit);
+export default connect(null, { makeTransaction })(Transfer);

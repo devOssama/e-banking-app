@@ -7,7 +7,9 @@ import SignIn from './components/auth/Login';
 import Copyright from './components/layout/Footer';
 import CustomAlert from './components/layout/Alert';
 import BankHome from './components/bankManagement/BankHome';
-import PrivateRoute from './components/routing/PrivateRoute';
+import UserHome from './components/accountManagement/UserHome';
+import PrivateBankRoute from './components/routing/PrivateBankRoute';
+import PrivateUserRoute from './components/routing/PrivateUserRoute';
 
 //Redux
 import { LOGOUT } from './actions/types';
@@ -39,7 +41,8 @@ const App = () => {
             <Route exact path='/' component={Landing} />
             <Route exact path='/Register' component={SignUp} />
             <Route exact path='/Login' component={SignIn} />
-            <PrivateRoute exact path='/BankHome' component={BankHome} />
+            <PrivateBankRoute exact path='/BankHome' component={BankHome} />
+            <PrivateUserRoute exact path='/AccountHome' component={UserHome} />
           </Switch>
 
           <Copyright />

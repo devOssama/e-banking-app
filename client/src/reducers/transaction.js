@@ -1,5 +1,6 @@
 import {
   GET_ALL_TRANSACTIONS,
+  GET_ALL_PERSONAL_TRANSACTIONS,
   TRANSACTION_ERROR,
   MAKE_TRANSACTION,
   MAKE_TRANSACTION_ERROR,
@@ -23,6 +24,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case GET_ALL_TRANSACTIONS:
+    case GET_ALL_PERSONAL_TRANSACTIONS:
       return {
         ...state,
         transactions: payload,

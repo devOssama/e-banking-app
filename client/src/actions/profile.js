@@ -1,4 +1,6 @@
 import api from '../utils/api';
+import { setAlert } from './alert';
+import { getCurrentBank } from './bank';
 
 import {
   GET_PROFILE,
@@ -51,7 +53,14 @@ export const credit = (formData) => async (dispatch) => {
       type: CREDIT,
       payload: res.data,
     });
+    dispatch(setAlert('Credit Success !', 'success'));
+    dispatch(getCurrentBank());
   } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
     dispatch({
       type: CREDIT_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -67,7 +76,14 @@ export const debit = (formData) => async (dispatch) => {
       type: DEBIT,
       payload: res.data,
     });
+    dispatch(setAlert('Debit Success !', 'success'));
+    dispatch(getCurrentBank());
   } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
     dispatch({
       type: DEBIT_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },

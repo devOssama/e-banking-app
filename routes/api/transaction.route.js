@@ -23,6 +23,9 @@ router.post(
     ],
   ],
   async (req, res) => {
+    if (req.user.role !== 'user') {
+      return res.status(500).send('Unauthorized');
+    }
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -34,7 +37,7 @@ router.post(
       accountNumber: targetAccountNumber,
     });
     if (!targetAccount) {
-      return res.status(404).json({ msg: 'Account not found' });
+      return res.status(404).json({ errors: [{ msg: 'Account not found.' }] });
     }
 
     let currentAccount = await Profile.findOne({ user: req.user.id });
@@ -43,10 +46,12 @@ router.post(
     if (accountNumber === targetAccountNumber) {
       return res
         .status(404)
-        .json({ msg: `you can't transfer to your account` });
+        .json({ errors: [{ msg: `you can't transfer to your account` }] });
     }
     if (Balance - amount < 0) {
-      return res.status(404).json({ msg: 'Balance is not enought' });
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Balance is not enought !' }] });
     }
 
     //Build transaction Object
@@ -88,12 +93,33 @@ router.post(
 //@desc   GET all transactions
 //@access Private
 router.get('/', auth, async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(500).send('Unauthorized');
+  }
   try {
-    const transactions = await Transaction.find().populate('user', [
-      'firstName',
-      'lastName',
-      'email',
-    ]);
+    const transactions = await Transaction.find()
+      .sort({ _id: -1 })
+      .populate('user', ['firstName', 'lastName'])
+      .limit(10);
+    res.json(transactions);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route  GET api/transaction/personal
+//@desc   GET own transactions
+//@access Private
+router.get('/personal', auth, async (req, res) => {
+  try {
+    if (req.user.role !== 'user') {
+      return res.status(500).send('Unauthorized');
+    }
+    const transactions = await Transaction.find({ user: req.user.id })
+      .sort({ _id: -1 })
+      .populate('user', ['firstName', 'lastName'])
+      .limit(10);
     res.json(transactions);
   } catch (err) {
     console.error(err.message);

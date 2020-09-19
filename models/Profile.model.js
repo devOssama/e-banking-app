@@ -7,6 +7,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   accountNumber: {
     type: String,
+    unique: true,
     minlength: 8,
     maxlength: 8,
     required: true,

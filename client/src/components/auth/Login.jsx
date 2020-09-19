@@ -52,7 +52,6 @@ const SignIn = ({ login, isAuthenticated, role }) => {
     e.preventDefault();
     login(email, password);
   };
-
   //redirect
   if (isAuthenticated) return redirect(role);
 
