@@ -16,16 +16,16 @@ const Profile = require('../../models/Profile.model');
 router.post(
   '/',
   [
-    check('firstName', 'firstname is required').not().isEmpty(),
-    check('lastName', 'lastname is required').not().isEmpty(),
-    check('email', 'Please include valid email address').isEmail(),
+    check('firstName', 'Le prénom est requis').not().isEmpty(),
+    check('lastName', 'Le nom est requis').not().isEmpty(),
+    check('email', 'Veuillez inclure une adresse e-mail valide').isEmail(),
     check(
       'password',
-      'Please enter a password with 8 or more characters'
+      'Veuillez saisir un mot de passe de 8 caractères ou plus'
     ).isLength({ min: 8 }),
-    check('dateOfBirth', 'dateOfBirth is required').not().isEmpty(),
-    check('phone', 'phone is required').not().isEmpty(),
-    check('city', 'city is required').not().isEmpty(),
+    check('dateOfBirth', 'la date de naissance est requise').not().isEmpty(),
+    check('phone', 'le numéro de téléphone est requis').not().isEmpty(),
+    check('city', 'La ville est requise').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -52,7 +52,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User already exists.' }] });
+          .json({ errors: [{ msg: `L'utilisateur existe déjà.` }] });
       }
 
       //new User

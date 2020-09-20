@@ -94,7 +94,7 @@ const SignUp = ({ setAlert, isAuthenticated, register, role }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Sign up
+          S'ENREGISTER
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
           <Grid container spacing={2}>
@@ -219,7 +219,7 @@ const SignUp = ({ setAlert, isAuthenticated, register, role }) => {
             color='primary'
             className={classes.submit}
           >
-            Sign Up
+            Créer un compte
           </Button>
           <Grid container justify='flex-end'>
             <Grid item></Grid>

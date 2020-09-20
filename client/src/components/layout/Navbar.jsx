@@ -92,7 +92,7 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
             component={Link}
             to='/'
           >
-            Banque populair
+            Banque populaire
           </Typography>
           <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
         </Toolbar>

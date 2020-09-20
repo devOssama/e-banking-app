@@ -64,7 +64,7 @@ const SignIn = ({ login, isAuthenticated, role }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Sign in
+          Connexion
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
           <TextField
@@ -73,7 +73,7 @@ const SignIn = ({ login, isAuthenticated, role }) => {
             required
             fullWidth
             id='email'
-            label='Email Address'
+            label='Adresse Email'
             name='email'
             value={email}
             autoComplete='email'
@@ -87,7 +87,7 @@ const SignIn = ({ login, isAuthenticated, role }) => {
             fullWidth
             name='password'
             value={password}
-            label='Password'
+            label='Mot de passe'
             type='password'
             id='password'
             autoComplete='current-password'
@@ -101,7 +101,7 @@ const SignIn = ({ login, isAuthenticated, role }) => {
             color='primary'
             className={classes.submit}
           >
-            Sign In
+            Se connecter
           </Button>
         </form>
       </div>

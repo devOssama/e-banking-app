@@ -15,9 +15,9 @@ router.post(
     [
       check(
         'targetAccountNumber',
-        'Account number should be at least 8 carachters ! '
+        'Le numéro de compte doit comporter au moins 8 caractères!'
       ).isLength({ min: 8 }),
-      check('amount', 'Please enter an amount with 10 DH at least').isFloat({
+      check('amount', `Veuillez saisir un montant d'au moins 10 DH`).isFloat({
         min: 10,
       }),
     ],
@@ -37,7 +37,9 @@ router.post(
       accountNumber: targetAccountNumber,
     });
     if (!targetAccount) {
-      return res.status(404).json({ errors: [{ msg: 'Account not found.' }] });
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'le compte est introuvable.' }] });
     }
 
     let currentAccount = await Profile.findOne({ user: req.user.id });
@@ -46,12 +48,12 @@ router.post(
     if (accountNumber === targetAccountNumber) {
       return res
         .status(404)
-        .json({ errors: [{ msg: `you can't transfer to your account` }] });
+        .json({
+          errors: [{ msg: `vous ne pouvez pas transférer vers votre compte` }],
+        });
     }
     if (Balance - amount < 0) {
-      return res
-        .status(404)
-        .json({ errors: [{ msg: 'Balance is not enought !' }] });
+      return res.status(404).json({ errors: [{ msg: 'Pas assez de solde!' }] });
     }
 
     //Build transaction Object

@@ -17,7 +17,9 @@ router.get('/me', auth, async (req, res) => {
     }).populate('user', ['firstName', 'lastName']);
 
     if (!profile) {
-      return res.status(400).json({ msg: 'There is no profile for this user' });
+      return res
+        .status(400)
+        .json({ msg: `Il n'y a pas de profil pour cet utilisateur` });
     }
 
     res.json(profile);
@@ -37,9 +39,9 @@ router.post(
     [
       check(
         'accountNumber',
-        'Account number should be at least 8 carachters ! '
+        'Le numéro de compte doit comporter au moins 8 caractères! '
       ).isLength({ min: 6 }),
-      check('Balance', 'Please enter an amount with 10 DH at least').isLength({
+      check('Balance', `Veuillez saisir un montant d'au moins 10 DH`).isLength({
         min: 2,
       }),
     ],
@@ -118,7 +120,7 @@ router.get('/user/:user_id', checkObjectId('user_id'), async (req, res) => {
     }).populate('user', ['firstName', 'lastName']);
 
     if (!profile) {
-      return res.status(400).json({ msg: 'Profile not found.' });
+      return res.status(400).json({ msg: 'le compte est introuvable.' });
     }
 
     res.json(profile);
@@ -138,9 +140,9 @@ router.put(
     [
       check(
         'accountNumber',
-        'Account number should be at least 8 carachters ! '
+        'Le numéro de compte doit comporter au moins 8 caractères!'
       ).isLength({ min: 8 }),
-      check('amount', 'Please enter an amount with 10 DH at least').isFloat({
+      check('amount', `Veuillez saisir un montant d'au moins 10 DH`).isFloat({
         min: 10,
       }),
     ],
@@ -159,7 +161,9 @@ router.put(
 
     let profile = await Profile.findOne({ accountNumber: accountNumber });
     if (!profile) {
-      return res.status(400).json({ errors: [{ msg: 'Profile not found.' }] });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'le compte est introuvable.' }] });
     }
     let bank = await Bank.findOne({ bankName: 'banque populaire' });
 
@@ -167,9 +171,7 @@ router.put(
     const totalBankBalance = parseInt(bank.totalDeposit);
 
     if (totalBankBalance < amount) {
-      return res
-        .status(500)
-        .json({ errors: [{ msg: 'Not enought balance !' }] });
+      return res.status(500).json({ errors: [{ msg: 'Pas assez de solde!' }] });
     }
 
     try {
@@ -206,9 +208,9 @@ router.put(
     [
       check(
         'accountNumber',
-        'Account number should be at least 8 carachters ! '
+        'Le numéro de compte doit comporter au moins 8 caractères!'
       ).isLength({ min: 8 }),
-      check('amount', 'Please enter an amount with 10 DH at least').isFloat({
+      check('amount', `Veuillez saisir un montant d'au moins 10 DH`).isFloat({
         min: 10,
       }),
     ],
@@ -227,7 +229,9 @@ router.put(
 
     let profile = await Profile.findOne({ accountNumber: accountNumber });
     if (!profile) {
-      return res.status(400).json({ errors: [{ msg: 'Profile not found.' }] });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'le compte est introuvable.' }] });
     }
     let bank = await Bank.findOne({ bankName: 'banque populaire' });
 
@@ -235,9 +239,7 @@ router.put(
     const totalBankBalance = parseInt(bank.totalDeposit);
 
     if (userBalance < amount) {
-      return res
-        .status(500)
-        .json({ errors: [{ msg: 'Not enought balance !' }] });
+      return res.status(500).json({ errors: [{ msg: 'Pas assez de solde!' }] });
     }
 
     try {

@@ -65,7 +65,7 @@ const CreditDebit = ({ credit, debit }) => {
             required
             fullWidth
             id='target'
-            label='Target account'
+            label='N° de compte du destinataire'
             name='accountNumber'
             value={accountNumber}
             autoComplete='target'
@@ -79,7 +79,7 @@ const CreditDebit = ({ credit, debit }) => {
             fullWidth
             name='amount'
             value={amount}
-            label='Amount'
+            label='Montant'
             id='amount'
             autoComplete='amount'
             onChange={onChange}
@@ -94,7 +94,7 @@ const CreditDebit = ({ credit, debit }) => {
                 className={classes.submit}
                 onClick={onSubmitCredit}
               >
-                Credit
+                Créditer
               </Button>
             </Grid>
 
@@ -107,7 +107,7 @@ const CreditDebit = ({ credit, debit }) => {
                 className={classes.submit}
                 onClick={onSubmitDebit}
               >
-                Debit
+                Débiter
               </Button>
             </Grid>
           </Grid>

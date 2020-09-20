@@ -50,7 +50,7 @@ export const makeTransaction = (formData) => async (dispatch) => {
       type: MAKE_TRANSACTION,
       payload: res.data,
     });
-    dispatch(setAlert('Transfer is Success !', 'success'));
+    dispatch(setAlert('Transfert est succès  !', 'success'));
     dispatch(getCurrentProfile());
     dispatch(getAllPersonalTransactions());
   } catch (err) {

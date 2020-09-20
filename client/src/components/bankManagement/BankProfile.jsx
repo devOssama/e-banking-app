@@ -21,8 +21,8 @@ const BankProfile = ({ loading, getCurrentBank, bank }) => {
         prop1: bank.totalDeposit,
         prop2: bank.totalUser,
       }}
-      title1={'Total Deposits :'}
-      title2={'Total Users :'}
+      title1={'Solde total :'}
+      title2={`Nombre d'utilisateurs :`}
     />
   );
 };

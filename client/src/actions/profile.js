@@ -53,7 +53,7 @@ export const credit = (formData) => async (dispatch) => {
       type: CREDIT,
       payload: res.data,
     });
-    dispatch(setAlert('Credit Success !', 'success'));
+    dispatch(setAlert('Succès du crédit!', 'success'));
     dispatch(getCurrentBank());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -76,7 +76,7 @@ export const debit = (formData) => async (dispatch) => {
       type: DEBIT,
       payload: res.data,
     });
-    dispatch(setAlert('Debit Success !', 'success'));
+    dispatch(setAlert('Débit réussi!', 'success'));
     dispatch(getCurrentBank());
   } catch (err) {
     const errors = err.response.data.errors;

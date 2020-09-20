@@ -35,7 +35,7 @@ export const register = (formData) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
-    dispatch(setAlert('Register Success !', 'success'));
+    dispatch(setAlert('Inscription réussie!', 'success'));
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -61,7 +61,7 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    dispatch(setAlert('Login Success !', 'success'));
+    dispatch(setAlert('Connexion réussie!', 'success'));
 
     dispatch(loadUser());
   } catch (err) {

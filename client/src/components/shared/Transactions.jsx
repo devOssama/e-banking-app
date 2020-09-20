@@ -31,24 +31,24 @@ const Transactions = ({ loading, transaction: { transactions } }) => {
 
   return (
     <React.Fragment>
-      <Title>All Transactions</Title>
+      <Title>Toutes les transactions</Title>
       <Table size='small'>
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>First Name</TableCell>
-            <TableCell>Last Name</TableCell>
-            <TableCell>Account Number</TableCell>
-            <TableCell>Target Account</TableCell>
-            <TableCell align='right'>Amount (DH)</TableCell>
+            <TableCell>Nom</TableCell>
+            <TableCell>Prénom</TableCell>
+            <TableCell>Numéro de compte</TableCell>
+            <TableCell>N° de compte du destinataire</TableCell>
+            <TableCell align='right'>Montant (DH)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {transactions.map((row) => (
             <TableRow key={row._id}>
               <TableCell>{row.madeAt}</TableCell>
-              <TableCell>{row.user.firstName}</TableCell>
               <TableCell>{row.user.lastName}</TableCell>
+              <TableCell>{row.user.firstName}</TableCell>
               <TableCell>{row.accountNumber}</TableCell>
               <TableCell>{row.targetAccount}</TableCell>
               <TableCell align='right'>{row.Amount}</TableCell>
@@ -58,7 +58,7 @@ const Transactions = ({ loading, transaction: { transactions } }) => {
       </Table>
       <div className={classes.seeMore}>
         <Link color='primary' href='#' onClick={preventDefault}>
-          *only the last 10 transactions
+          *seulement les 10 dernières transactions
         </Link>
       </div>
     </React.Fragment>

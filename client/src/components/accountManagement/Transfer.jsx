@@ -61,7 +61,7 @@ const Transfer = ({ makeTransaction }) => {
             required
             fullWidth
             id='target'
-            label='Target account'
+            label='N° de compte du destinataire'
             name='targetAccountNumber'
             value={targetAccountNumber}
             autoComplete='target'
@@ -75,7 +75,7 @@ const Transfer = ({ makeTransaction }) => {
             fullWidth
             name='amount'
             value={amount}
-            label='Amount'
+            label='Montant'
             id='amount'
             autoComplete='amount'
             onChange={onChange}
@@ -89,7 +89,7 @@ const Transfer = ({ makeTransaction }) => {
               className={classes.submit}
               onClick={onSubmitTransaction}
             >
-              Transfer
+              Transférer
             </Button>
           </Grid>
         </form>

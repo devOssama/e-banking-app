@@ -35,11 +35,11 @@ router.post(
     [
       check(
         'bankName',
-        'Bank name should be at least 2 carachters ! '
+        'Le nom de la banque doit comporter au moins 2 caractères! '
       ).isLength({ min: 2 }),
       check(
         'totalDeposit',
-        'Total deposit should be at least 100 DH ! '
+        `Le sold total doit être d'au moins 100 DH!`
       ).isLength({ min: 3 }),
     ],
   ],
