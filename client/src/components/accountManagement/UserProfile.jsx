@@ -22,8 +22,8 @@ const UserProfile = ({ getCurrentProfile, loading, profile }) => {
         prop1: profile.Balance,
         prop2: profile.accountNumber,
       }}
-      title1={'Balance :'}
-      title2={'Account Number :'}
+      title1={'Solde :'}
+      title2={'Numero de compte :'}
     />
   );
 };
