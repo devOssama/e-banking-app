@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
+  appBar: {
+    background: 'transparent',
+  },
   toolbar: {
     flexWrap: 'wrap',
   },

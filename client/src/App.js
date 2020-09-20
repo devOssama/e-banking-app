@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
@@ -34,7 +35,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
+        <div className='App'>
           <Navbar />
           <CustomAlert />
           <Switch>
@@ -44,9 +45,8 @@ const App = () => {
             <PrivateBankRoute exact path='/BankHome' component={BankHome} />
             <PrivateUserRoute exact path='/AccountHome' component={UserHome} />
           </Switch>
-
           <Copyright />
-        </Fragment>
+        </div>
       </Router>
     </Provider>
   );

@@ -20,7 +20,7 @@ import redirect from '../../utils/redirect';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -148,6 +148,9 @@ const SignUp = ({ setAlert, isAuthenticated, register, role }) => {
                 label='Date de naissance'
                 name='dateOfBirth'
                 autoComplete='dateNaissance'
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 value={dateOfBirth}
                 onChange={onChange}
               />
@@ -199,7 +202,7 @@ const SignUp = ({ setAlert, isAuthenticated, register, role }) => {
                 required
                 fullWidth
                 name='password2'
-                label='confirmer le mot de pass'
+                label='confirmer password'
                 type='password'
                 id='password2'
                 autoComplete='current-password'

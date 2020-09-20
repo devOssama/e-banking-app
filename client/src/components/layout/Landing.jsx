@@ -16,15 +16,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
   },
   footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+    //backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(3),
   },
 }));
 
@@ -38,7 +38,7 @@ const Landing = ({ isAuthenticated, role }) => {
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
-          <Container maxWidth='sm'>
+          <Container maxWidth='sm' maxHeight='sm'>
             <Typography
               component='h1'
               variant='h2'
@@ -84,7 +84,6 @@ const Landing = ({ isAuthenticated, role }) => {
         </div>
       </main>
       {/* Footer */}
-      <footer className={classes.footer}></footer>
       {/* End footer */}
     </React.Fragment>
   );
