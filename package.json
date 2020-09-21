@@ -2,6 +2,9 @@
   "name": "application-e-banking",
   "version": "1.0.0",
   "description": "e-banking application",
+  "engines": {
+    "node": "12.18.3"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server",
